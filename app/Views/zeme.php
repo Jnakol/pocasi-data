@@ -30,7 +30,7 @@
     $table->setHeading('ID','Název', 'Zkratka');
 
     foreach($zeme as $row) {
-        $table->addRow($row->id, anchor()$row->name, $row->short_name);
+        $table->addRow($row->id, anchor('stanice/'. $row->id, $row->name), $row->short_name);
     }
     echo $table->generate();
     ?>
