@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Bundesland;
+use App\Models\Data;
 use App\Models\Station;
 
 class Main extends BaseController
@@ -21,15 +22,28 @@ class Main extends BaseController
 /**
  * @param $id - ID země
  * 
- * 
  */
     public function stanice($id){
         $bundesland = new Bundesland();
         $zeme = $bundesland->find($id);
         $station = new Station();
         $stanice = $station->where('bundesland', $id)->findAll();
-        var_dump($zeme);
-        var_dump($stanice);
+        $data = [
+            "zeme" => $zeme,
+            "stanice" => $stanice
+        ];
+        echo view('stanice', $data);
+    }
+    public function data($id){
+        $station = new Station();
+        $stanice = $station->find($id);
+        $dataModel = new Data();
+        $dataPocasi = $dataModel->where('Stations_ID', $id)->orderBy('date', 'DESC')->paginate(25);
+        $data = [
+            "stanice" => $stanice,
+            "dataPocasi" => $dataPocasi
+        ];
+        echo view('data', $data);
 
     }
 }

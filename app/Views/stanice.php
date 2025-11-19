@@ -1,10 +1,9 @@
 <?= $this->extend('Layout/template') ?>
 <?= $this->section('content'); ?>
-    <h1>Přehled zemí</h1>
+    <h1 class="text-center">Stanice v zemi <?= $zeme->name?></h1>
     
     <?php
     $table = new \CodeIgniter\View\Table();
-
     $template = array(
         'table_open'=> '<table class="table table-borderless table-hover">',
         'thead_open'=> '<thead>',
@@ -27,10 +26,10 @@
         );
         $table->setTemplate($template);
 
-    $table->setHeading('ID','Název', 'Zkratka');
+    $table->setHeading('Místo','Zeměpisná šířka', 'Zeměpisná délka', 'Nadmořská výška');
 
-    foreach($zeme as $row) {
-        $table->addRow($row->id, anchor('stanice/'. $row->id, $row->name), $row->short_name);
+    foreach($stanice as $row) {
+        $table->addRow(anchor('data/'. $row->S_ID, $row->place), $row->geo_longtitude, $row->geo_latitude, $row->height . ' m.n.m.');
     }
     echo $table->generate();
     ?>
