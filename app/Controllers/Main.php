@@ -34,12 +34,18 @@ class Main extends BaseController
         ];
         echo view('stanice', $data);
     }
+/**
+ * @param $id - ID stanice
+ * 
+ */
     public function data($id){
         $station = new Station();
         $stanice = $station->find($id);
         $dataModel = new Data();
         $dataPocasi = $dataModel->where('Stations_ID', $id)->orderBy('date', 'DESC')->paginate(25);
+        $pager = $dataModel->pager;
         $data = [
+            "pager" => $pager,
             "stanice" => $stanice,
             "dataPocasi" => $dataPocasi
         ];

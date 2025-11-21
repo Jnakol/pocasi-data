@@ -1,7 +1,6 @@
 <?= $this->extend('Layout/template') ?>
 <?= $this->section('content'); ?>
     <h1>Přehled zemí</h1>
-    
     <?php
     $table = new \CodeIgniter\View\Table();
 
@@ -27,7 +26,7 @@
         );
         $table->setTemplate($template);
 
-    $table->setHeading('ID','Název', 'Zkratka');
+    $table->setHeading('ID', 'Název', 'Zkratka');
 
     foreach($zeme as $row) {
         $table->addRow($row->id, anchor('stanice/'. $row->id, $row->name), $row->short_name);

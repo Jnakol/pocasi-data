@@ -1,6 +1,6 @@
 <?= $this->extend('Layout/template') ?>
 <?= $this->section('content'); ?>
-    <h1 class="text-center">Stanice v zemi <?= $zeme->name?></h1>
+    <h1 class="text-center">Přehled meteorologických stanic ve spolkové zemi <?= $zeme->name?></h1>
     
     <?php
     $table = new \CodeIgniter\View\Table();
