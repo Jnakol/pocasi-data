@@ -2,7 +2,7 @@
 <?= $this->section('content'); ?>
     <h1 class="text-center">Meteorologická data stanice <?= $stanice->place ?></h1>
 
-    <div class="row">
+    <div class="row px-3">
     <?php
     $table = new \CodeIgniter\View\Table();
     $template = array(
@@ -27,11 +27,12 @@
         );
         $table->setTemplate($template);
 
-    $table->setHeading('Datum', 'Kvalita', 'Minimum 5cm', 'Minimum 2m', 'Prostřední 2m', 'Maximální 2m', 'Vlhkost', 'Mid vítr', 'Max vírt', 'Délka slunce', 'Prostřední mrak', 'Srážky','Prostřední vzduch tlak');
-    
+    $table->setHeading('Datum', 'Kvalita', 'Minimum 5cm [K]', 'Minimum 2m [K]', 'Prostřední 2m [°F]', 'Maximální 2m [°C]', 'Vlhkost [%]', 'Mid vítr [m/s]', 
+    'Max vírt [m/s]', 'Délka slunce [h]', 'Prostřední mrak [%]', 'Srážky [mm]','Prostřední vzduch tlak [hPa]');
+
     foreach($dataPocasi as $row) {
 
-        $table->addRow(date('d.m.Y', strtotime($row->date)), $row->quality, $row->min_5cm, $row->min_2m, $row->mid_2m, $row->max_2m, $row->humidity, $row->mid_wind, $row->max_wind, $row->sun_length, $row->mid_cloud, $row->precipitation,$row->mid_air_pressure);
+        $table->addRow(date('d.m.Y', strtotime($row->date)), $row->quality, $row->min_5cm+273.15, $row->min_2m+273.15, $row->mid_2m*1.8+32, $row->max_2m, $row->humidity, $row->mid_wind, $row->max_wind, $row->sun_length, $row->mid_cloud*10, $row->precipitation,$row->mid_air_pressure);
     }
     
     echo $table->generate();
