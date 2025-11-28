@@ -1,7 +1,11 @@
 <?= $this->extend('Layout/template') ?>
 <?= $this->section('content'); ?>
     <h1 class="text-center">Meteorologická data stanice <?= $stanice->place ?></h1>
-
+<div class="row">
+    <div class="offset-5 col-2 d-flex justify-content-center mb-5">
+        <?= anchor('stanice/' . $stanice->S_ID, 'Zpět', '<button type="button" class="btn btn-sm btn-outline-dark mt-2"></button') ?>
+    </div>
+</div>
     <div class="row px-3">
     <?php
     $table = new \CodeIgniter\View\Table();
