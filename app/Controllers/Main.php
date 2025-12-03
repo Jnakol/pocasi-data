@@ -41,10 +41,13 @@ class Main extends BaseController
     public function data($id){
         $station = new Station();
         $stanice = $station->find($id);
+        $bundesland = new Bundesland();
+        $zeme = $bundesland->find($stanice->bundesland);
         $dataModel = new Data();
         $dataPocasi = $dataModel->where('Stations_ID', $id)->orderBy('date', 'DESC')->paginate(25);
         $pager = $dataModel->pager;
         $data = [
+            "zeme" => $zeme,
             "pager" => $pager,
             "stanice" => $stanice,
             "dataPocasi" => $dataPocasi

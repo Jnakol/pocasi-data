@@ -1,11 +1,11 @@
 <?= $this->extend('Layout/template') ?>
 <?= $this->section('content'); ?>
-<div class="row my-5 pt-3">
+<div class="row my-3">
     <h1 class="text-center">Přehled meteorologických stanic ve spolkové zemi <?= $zeme->name ?></h1>
 </div>
 <div class="row">
     <div class="offset-5 col-2 d-flex justify-content-center mb-5">
-        <?= anchor('/', 'Zpět', '<button type="button" class="btn btn-sm btn-outline-dark mt-2"></button') ?>
+        <?= anchor('/', '<button type="button" class="btn btn-sm btn-warning mt-2">Zpět na úvodní stránku</button>') ?>
     </div>
 </div>
 <div class="row">
@@ -24,10 +24,22 @@
                         <li> Nadmořská výška: <?= $row->height ?> m. n. m.</li>
                     </ul>
 
-                    <?= anchor('data/' . $row->S_ID, 'Zobrazit data', '<button type="button" class="btn btn-sm btn-outline-info mt-2"></button>') ?>
+                    <?= anchor('data/' . $row->S_ID, '<button type="button" class="btn btn-sm btn-outline-info mt-2">Zobrazit data</button>') ?>
                 </div>
             </div>
         </div>
     <?php endforeach; ?>
+</div>
+<div class="row mb-5">
+    <div class="col-lg-6 col-md-8 col-12 d-flex justify-content-center">
+            <img src="<?= base_url('obrazky/mapy/'. $zeme->map); ?>" class="img-fluid"
+            style="border: 2px solid #ccc; max-height: 250px; object-fit: contain;"
+            alt="Mapa <?= $zeme->name ?>">
+    </div>
+    <div class="col-lg-6 col-md-8 col-12">
+        <img src="<?= base_url('obrazky/vlajky/' . $zeme->flag) ?>"
+        style="border: 2px solid #ccc; max-height: 250px; object-fit: contain;" 
+        alt="Vlajka <?= $zeme->name ?>">
+    </div>
 </div>
 <?= $this->endSection(); ?>
